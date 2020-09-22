@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Programming"
-author: "Sana Rasheed"
-date: "May 14, 2020"
+author: "Muhammad Umair Aslam"
+date: "Sept 20, 2020"
 output: html_document
 ---
 
@@ -24,26 +24,32 @@ output: html_document
 
 ```{r }
 #### Start solution ####
+x<-c("m","u","h","a","m","m","a","d")
+x
 ```
 
 
 ```{r }
-
+firstname<-paste(x,collapse = "")
+firstname
 ```
 
 
 ```{r }
-
+n<-100:120
+n
 ```
 
 
 ```{r }
-
+m<-matrix(data=seq(2,18,by=2),nrow = 3,ncol = 3)
+m
 ```
 
 
 ```{r }
-
+dimnames(m)<-list(c("Row_1","Row_2","Row_3"),c("Col_A","Col_B","col_C"))
+m
 ```
 
 
@@ -64,17 +70,20 @@ output: html_document
 
 
 ```{r }
-
+a<-c("Self-Employed","Employed","Self-Employed","Unemployed","Employed","Unemployed","Employed","Self-Employed","Unemployed","Employed")
+emp_status<-factor(a,levels = c("Self-Employed","Employed","Unemployed"))
+emp_status
 ```
 
 
 ```{r }
-
+c<-table(emp_status)
+c
 ```
 
 
 ```{r }
-
+unclass(emp_status)
 ```
 
 
@@ -101,22 +110,14 @@ output: html_document
 
 
 ```{r }
-
+bank_customers<-data.frame(CustomerID=c("Alicia","Nancy","Fernando","Louis","Diane"),hasAccount=c(F,T,T,T,NA),totalBalance=c(NA,10000,100,0,NA))
+bank_customers
 ```
 
-
 ```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
+nrow(bank_customers)
+ncol(bank_customers)
+names(bank_customers)
 ```
 
 
@@ -143,29 +144,28 @@ output: html_document
 
 
 ```{r }
+seq_n <- c(1:100)
+var <- 1;
+pNCounter <- 1;
+while(pNCounter <= 10) {
+  i <- seq_n[var]
+  var <- var + 1
+  if(i == 1) next;
+  is_prime <- TRUE
+  x <- seq(2, i-1)
+  for (a in x) {
+    if (i%%a == 0){
+      is_prime <- FALSE
+      break
+    }
+  }
+  if(is_prime) {
+    pNCounter <- pNCounter + 1
+    print(seq_n[var-1])
+  }
+}
 
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -182,29 +182,18 @@ output: html_document
 
 
 ```{r }
-
+mat_1<-matrix(1:9,3,3)
+mat_1
 ```
 
 
 ```{r }
-
+for(row in 1:nrow(mat_1)) {
+    for(col in 1:ncol(mat_1)) {
+      print(paste("row ",row, "col ",col, " has a value ", mat_1[row,col]))
+    }
+}
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -227,29 +216,27 @@ output: html_document
 
 
 ```{r }
-
+gcd<- function(a,b)
+{
+  if(a>b){
+    smaller=b
+  }
+  else{
+    smaller=a
+  }
+  for(i in 1:smaller){
+    if((a%%i==0)&&(b%%i==0)){
+      answer=i
+    }
+  }
+  return(answer)
+}
 ```
 
 
 ```{r }
-
+gcd(22,11)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -269,29 +256,26 @@ output: html_document
 
 
 ```{r }
+checkArg=list()
+allConditionsMeet<- function(a,b){
+  if((a<b)&&(b%%2==0)){
+    return(TRUE)
+  }else{
+    return(FALSE)
+  }
+}
 
 ```
 
 
 ```{r }
-
+print(allConditionsMeet(5,11))
 ```
 
 
 ```{r }
-
+args(allConditionsMeet)
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -316,27 +300,29 @@ output: html_document
 
 
 ```{r }
+matrix_1<-matrix(1:6,2,3)
+matrix_2<-matrix(1:6,3,2)
+matrix_1
+matrix_2
+```
 
+```{r }
+matrix_mult<-matrix_1%*%matrix_2
+matrix_mult
 ```
 
 
 ```{r }
-
+my_mat<-matrix(1:4,2,2)
+my_mat
 ```
 
 
 ```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
+det_2by2 <- function(mat_2b2) {
+    return(mat_2b2[[1,1]] * mat_2b2[[2,2]] - mat_2b2[[1,2]] * mat_2b2[[2,1]])
+}
+det_2by2(my_mat)
 ```
 
 
@@ -360,29 +346,26 @@ output: html_document
 
 
 ```{r }
-
+curr_date<-Sys.Date()
+curr_time<-Sys.time()
+curr_date
+curr_date
 ```
 
 
 ```{r }
-
+curr_date<-as.POSIXlt(curr_date)
+curr_time<-as.POSIXlt(curr_time)
+names(unclass(curr_time))
 ```
 
 
 ```{r }
-
+print(paste("weekday: ", curr_time$wday))
+print(paste("year: ", as.integer(curr_time$year)+1900))
+print(paste("Sec: ", curr_time$sec))
+print(paste("Hour: ",curr_time$hour))
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -400,29 +383,20 @@ output: html_document
 
 
 ```{r }
-
+var= Sys.time()
+var
 ```
 
 
 ```{r }
-
+var_GMT= as.POSIXlt(var,tz="GMT")
+var_GMT
 ```
 
 
 ```{r }
-
+var-var_GMT
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -444,29 +418,37 @@ output: html_document
 
 
 ```{r }
-
+numbers<-list(100:150)
+numbers
 ```
 
 
 ```{r }
-
+mean_sd<- function(mydata){
+  res= list("Mean"= mean(mydata),"SD"= sd(mydata))
+  return(res)
+}
+m= lapply(numbers, mean_sd)
+print(paste("Mean: ",m[[1]]$Mean))
+print(paste("SD: ",m[[1]]$SD))
 ```
 
 
 ```{r }
-
+print(sapply(numbers, mean_sd))
 ```
 
 
 ```{r }
-
+n<- c(100:150)
+dim(n) <- c(1,51)
+print(apply(n, 1, mean_sd))
 ```
-
 
 ```{r }
-
+f<-gl(1,25)
+print(tapply(n[27:51], f, mean_sd))
 ```
-
 
 ```{r }
 #### End solution ####
@@ -484,29 +466,15 @@ output: html_document
 
 
 ```{r }
-
+mymat<- matrix(1:16,4,4)
+mymat
 ```
 
 
 ```{r }
-
+print(apply(mymat, 1, mean))
+print(apply(mymat,2,mean))
 ```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
-
-```{r }
-
-```
-
 
 ```{r }
 #### End solution ####
@@ -542,30 +510,25 @@ head(Orange)
 
 
 ```{r }
-
+split_data<- split(Orange, Orange$circumference)
+head(split_data)
 ```
 
 
 ```{r }
-
+print(split_data$`30`)
 ```
 
 
 ```{r }
-
+print(split_data$`75`)
 ```
 
 
 ```{r }
-
+sapply(list(split_data$'30'$age), mean)
+sapply(list(split_data$'214'$age), mean)
 ```
-
-
-```{r }
-
-```
-
-
 ```{r }
 #### End solution ####
 ```
